@@ -20,9 +20,9 @@ from common import nlp_common as nc  # noqa: E402
 _CSS = """
 <style>
   .nlp-hero {padding: 1.4rem 1.6rem; border-radius: 14px; margin-bottom: 1.1rem;
-             background: linear-gradient(120deg, {accent}18, {accent}05);
-             border: 1px solid {accent}33; border-left: 6px solid {accent};}
-  .nlp-hero h1 {margin: 0 0 .25rem 0; font-size: 1.85rem; color: {accent};
+             background: linear-gradient(120deg, __ACCENT__18, __ACCENT__05);
+             border: 1px solid __ACCENT__33; border-left: 6px solid __ACCENT__;}
+  .nlp-hero h1 {margin: 0 0 .25rem 0; font-size: 1.85rem; color: __ACCENT__;
                 font-weight: 700; letter-spacing: -.02em;}
   .nlp-hero p  {margin: 0; color: #475569; font-size: .98rem;}
   .nlp-badge {display:inline-block; padding:.15rem .55rem; border-radius:999px;
@@ -32,11 +32,11 @@ _CSS = """
   .nlp-badge-info {background:#e0e7ff; color:#3730a3;}
   .nlp-card {border:1px solid #e2e8f0; border-radius:12px; padding:1rem 1.15rem;
              background:#fff; box-shadow:0 1px 2px rgba(15,23,42,.04);}
-  .nlp-result {border:1px solid {accent}44; border-left:5px solid {accent};
-               border-radius:12px; padding:1rem 1.2rem; background:{accent}0d;}
+  .nlp-result {border:1px solid __ACCENT__44; border-left:5px solid __ACCENT__;
+               border-radius:12px; padding:1rem 1.2rem; background:__ACCENT__0d;}
   .nlp-result .label {font-size:.74rem; text-transform:uppercase; letter-spacing:.08em;
                       color:#64748b; font-weight:600;}
-  .nlp-result .value {font-size:1.7rem; font-weight:700; color:{accent}; line-height:1.15;}
+  .nlp-result .value {font-size:1.7rem; font-weight:700; color:__ACCENT__; line-height:1.15;}
   .nlp-metric {text-align:center; padding:.55rem .3rem; border-radius:10px;
                background:#f8fafc; border:1px solid #eef2f7;}
   .nlp-metric .v {font-size:1.15rem; font-weight:700; color:#0f172a;}
@@ -58,7 +58,9 @@ def configure_page(meta: dict) -> None:
         layout="wide",
         initial_sidebar_state="expanded",
     )
-    st.markdown(_CSS.format(accent=meta["accent"]), unsafe_allow_html=True)
+    # Do not use str.format() here: normal CSS uses braces, and format() would
+    # interpret declarations such as {padding: ...} as Python fields.
+    st.markdown(_CSS.replace("__ACCENT__", meta["accent"]), unsafe_allow_html=True)
 
 
 def render_hero(meta: dict) -> None:
