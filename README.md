@@ -32,21 +32,21 @@ state the *real* architecture. **6 of 15** folder names match their implementati
 
 | # | Model | Task | Framework | Real implementation | Name matches? | Test acc. | F1 (macro) | Deploy status |
 |---|-------|------|-----------|---------------------|:-------------:|:---------:|:----------:|---------------|
-| 01 | Bag of Words | Topic classification | scikit-learn | CountVectorizer(5k, 1-2g) + LogisticRegression | ✅ | 87.06% | 86.82% | ⏳ Ready to deploy |
-| 02 | TF-IDF | Topic classification | scikit-learn | TfidfVectorizer(10k, 1-2g) + Calibrated LinearSVC | ✅ | 91.55% | 91.36% | ⏳ Ready to deploy |
-| 03 | Word2Vec | Topic classification | gensim + sklearn | Word2Vec(100d) mean-pool + LogisticRegression | ✅ | 76.41% | 75.87% | ⏳ Ready to deploy |
-| 04 | GloVe | Topic classification | numpy + sklearn | PPMI co-occurrence → SVD(100) mean-pool + LR | ✅ | 89.81% | 89.65% | ⏳ Ready to deploy |
-| 05 | FastText | Topic classification | gensim + sklearn | FastText(100d, subwords 3-5g) mean-pool + LR | ✅ | 72.45% | 71.94% | ⏳ Ready to deploy |
-| 06 | ELMo (3-layer contextual) | Topic classification | scikit-learn | 3× TF-IDF→SVD(50) stack (char/word/bigram), weights .3/.4/.3 + LR | ⚠️ feature stack, not a biLM | 90.15% | 89.90% | ⏳ Ready to deploy |
-| 07 | BERT | Topic classification | scikit-learn | TF-IDF→SVD(100) + RidgeClassifier | ❌ no transformer | 91.35% | 91.14% | ⏳ Ready to deploy |
-| 08 | RoBERTa | Topic classification | scikit-learn | TF-IDF→SVD(100) + SGDClassifier(modified_huber) | ❌ no transformer | 90.62% | 90.41% | ⏳ Ready to deploy |
-| 09 | ALBERT | Topic classification | scikit-learn | TF-IDF→SVD(100) + PassiveAggressive | ❌ no transformer | 90.35% | 90.15% | ⏳ Ready to deploy |
-| 10 | DistilBERT | Topic classification | scikit-learn | TF-IDF(5k)→SVD(100) + Calibrated LinearSVC | ❌ no transformer | 90.68% | 90.43% | ⏳ Ready to deploy |
-| 11 | XLNet | Topic classification | scikit-learn | TF-IDF→SVD(100) + GradientBoosting | ❌ no transformer | 89.48% | 89.23% | ⏳ Ready to deploy |
-| 12 | T5 | Topic classification | scikit-learn | TF-IDF→SVD(100) + RandomForest(200) | ❌ no transformer | 89.48% | 89.22% | ⏳ Ready to deploy |
-| 13 | GPT | Topic classification | scikit-learn | TF-IDF→SVD(100) + Multinomial LogisticRegression | ❌ no transformer | 91.02% | 90.83% | ⏳ Ready to deploy |
-| 14 | BART | Topic classification | scikit-learn | TF-IDF→SVD(100) + ExtraTrees(200) | ❌ no transformer | 90.62% | 90.35% | ⏳ Ready to deploy |
-| 15 | ELECTRA | Topic classification | scikit-learn | TF-IDF→SVD(100) + Calibrated Perceptron | ❌ no transformer | 91.02% | 90.79% | ⏳ Ready to deploy |
+| 01 | Bag of Words | Topic classification | scikit-learn | CountVectorizer(5k, 1-2g) + LogisticRegression | ✅ | 87.06% | 86.82% | https://deep-learnin-rgjfwh7lgnn3fpbxgq4hhu.streamlit.app/ |
+| 02 | TF-IDF | Topic classification | scikit-learn | TfidfVectorizer(10k, 1-2g) + Calibrated LinearSVC | ✅ | 91.55% | 91.36% | https://deepvisionkararhaider-crypto-nlp-models-02-tfidfapp-scljkk.streamlit.app/ |
+| 03 | Word2Vec | Topic classification | gensim + sklearn | Word2Vec(100d) mean-pool + LogisticRegression | ✅ | 76.41% | 75.87% | https://nlp-models-4cubmnsogxz33lzpzbpwvw.streamlit.app/ |
+| 04 | GloVe | Topic classification | numpy + sklearn | PPMI co-occurrence → SVD(100) mean-pool + LR | ✅ | 89.81% | 89.65% | https://nlp-models-bwjjyu7snyrzfy6e3gtcya.streamlit.app/ |
+| 05 | FastText | Topic classification | gensim + sklearn | FastText(100d, subwords 3-5g) mean-pool + LR | ✅ | 72.45% | 71.94% | https://xg7bwessnijzufc9vvvixf.streamlit.app/|
+| 06 | ELMo (3-layer contextual) | Topic classification | scikit-learn | 3× TF-IDF→SVD(50) stack (char/word/bigram), weights .3/.4/.3 + LR | ⚠️ feature stack, not a biLM | 90.15% | 89.90% | https://pjekapzsu8cw7qtr78mq6x.streamlit.app/ |
+| 07 | BERT | Topic classification | scikit-learn | TF-IDF→SVD(100) + RidgeClassifier | ❌ no transformer | 91.35% | 91.14% | https://jhzyhwvcmws6ufcaxwt56a.streamlit.app/ |
+| 08 | RoBERTa | Topic classification | scikit-learn | TF-IDF→SVD(100) + SGDClassifier(modified_huber) | ❌ no transformer | 90.62% | 90.41% | https://d9kxmtjdzrb6hyn7f3cdla.streamlit.app/ |
+| 09 | ALBERT | Topic classification | scikit-learn | TF-IDF→SVD(100) + PassiveAggressive | ❌ no transformer | 90.35% | 90.15% | https://rrmk9ro3rt68soushjjnuv.streamlit.app/ |
+| 10 | DistilBERT | Topic classification | scikit-learn | TF-IDF(5k)→SVD(100) + Calibrated LinearSVC | ❌ no transformer | 90.68% | 90.43% | https://as49ubkzgvluwygntzwitv.streamlit.app/ |
+| 11 | XLNet | Topic classification | scikit-learn | TF-IDF→SVD(100) + GradientBoosting | ❌ no transformer | 89.48% | 89.23% | https://meu7nhthrxmw7mekfly9ej.streamlit.app/ |
+| 12 | T5 | Topic classification | scikit-learn | TF-IDF→SVD(100) + RandomForest(200) | ❌ no transformer | 89.48% | 89.22% | https://jcbckcz64b4drsyshfbvhc.streamlit.app/ |
+| 13 | GPT | Topic classification | scikit-learn | TF-IDF→SVD(100) + Multinomial LogisticRegression | ❌ no transformer | 91.02% | 90.83% |https://o6cmqtlxzb2erd4pnj4gxl.streamlit.app/ |
+| 14 | BART | Topic classification | scikit-learn | TF-IDF→SVD(100) + ExtraTrees(200) | ❌ no transformer | 90.62% | 90.35% | https://bastrj5ngmcgttfj75vjy3.streamlit.app/ |
+| 15 | ELECTRA | Topic classification | scikit-learn | TF-IDF→SVD(100) + Calibrated Perceptron | ❌ no transformer | 91.02% | 90.79% | https://wzb3henqejrbbjdxoo3bg6.streamlit.app/ |
 
 **Test accuracy** is measured on the held-out 20-Newsgroups **test split**
 (1,492 documents never seen during training). Training-set accuracy is never
