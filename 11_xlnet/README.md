@@ -1,40 +1,78 @@
 # 11. XLNet
 
-## Overview
-Generalized Autoregressive Pretraining: permutation language modeling captures bidirectional context.
+**Task:** Topic Classification (20-Newsgroups, 4 classes)
+**Framework:** scikit-learn
+**Real implementation:** TF-IDF (10k, 1-2 grams) -> TruncatedSVD(100) -> GradientBoostingClassifier
 
-**Dataset**: 20 Newsgroups (4 categories: hockey, space, graphics, politics)
-**Task**: Multi-class text classification
-**Implementation**: XLNet-style (TF-IDF + SVD + Gradient Boosting)
+⚠️ **Naming note:** No transformer is used. The name references XLNet's design; the implementation is classical.
 
-## Key Concept
-`10000 TF-IDF → SVD(100), autoregressive-style GB`
+---
 
-## Results
+## What it does
 
-| Metric    | Value  |
-|-----------|--------|
-| Accuracy  | 0.8686 |
-| Precision | 0.8671 |
-| F1-Score  | 0.8666 |
+Named after XLNet's autoregressive modelling; implemented as TF-IDF + SVD with a gradient-boosted tree ensemble.
 
 ## Files
-| File | Description |
-|------|-------------|
-| `model.py` | Main training and evaluation script |
-| `predictions.csv` | Model predictions on test set |
-| `data/newsgroups.csv` | Sample of training data |
-| `plots/xlnet_analysis.png` | Confusion matrix, PCA, per-class accuracy |
-| `requirements.txt` | Python dependencies |
 
-## Run
+| File | Purpose |
+|------|---------|
+| `model.py` | Original training script (unchanged from the original project). |
+| `app.py` | **Streamlit entry point** - deploy this on Streamlit Community Cloud. |
+| `requirements.txt` | Dependencies for this model only. |
+| `artifacts/model.joblib` | Trained model bundle used by `app.py`. |
+| `artifacts/metrics.json` | Verified held-out test metrics. |
+| `artifacts/meta.json` | Reproducibility info (hyper-parameters, versions). |
+| `data/newsgroups.csv` | Sample of the training data. |
+
+## Results (held-out test set)
+
+| Metric | Value |
+|---|---|
+| Test accuracy | 89.48% |
+| F1 (macro) | 89.23% |
+| Precision (macro) | 89.19% |
+| Recall (macro) | 89.30% |
+| Test set size | 1492 |
+| Train set size | 2242 |
+
+_Metrics are measured on the held-out 20-Newsgroups test split the model never trained on._
+
+## Run locally
+
 ```bash
 pip install -r requirements.txt
-python model.py
+python model.py                        # retrain from scratch (original script)
+python training/train_all.py --only 11   # rebuild artifacts/ from repo root
+streamlit run app.py
 ```
 
-## Categories
-- `rec.sport.hockey` → hockey
-- `sci.space` → space
-- `comp.graphics` → graphics
-- `talk.politics.misc` → politics
+## Deploy (free)
+
+1. Push this repository to GitHub.
+2. On **share.streamlit.io** → *New app* → *Deploy from GitHub*.
+3. Repository `deepvisionkararhaider-crypto/nlp-models`, branch `main`.
+4. **Main file path:** `11_xlnet/app.py`
+
+## Reproducible training
+
+- **Local / CPU:** `python training/train_all.py --only 11`
+- **Colab / Kaggle:** open [`notebooks/11_xlnet.ipynb`](../notebooks/11_xlnet.ipynb).
+  → No GPU is required for this model; it trains on CPU.
+
+## Input & output
+
+- **Input:** any English text (a sentence or a whole post).
+- **Output:** one of four topic labels - `hockey`, `space`, `graphics`, `politics` -
+  with a per-class score table.
+  Models marked `decision_function_softmax` show softmaxed decision-function
+  scores, which are **not** calibrated probabilities (stated in the app).
+
+## Limitations
+
+- Trained on only 4 of the 20-Newsgroups categories; other topics are forced into
+  these four.
+- 1990s Usenet text; modern or very short inputs are harder.
+- Classification only - no generation, summarisation or translation.
+
+---
+[← Back to the portfolio](../README.md) · [Source folder](https://github.com/deepvisionkararhaider-crypto/nlp-models/tree/main/11_xlnet)

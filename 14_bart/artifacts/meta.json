@@ -1,0 +1,31 @@
+{
+  "folder": "14_bart",
+  "num": 14,
+  "display_name": "BART",
+  "actual_architecture": "TF-IDF (10k, 1-2 grams) -> TruncatedSVD(100) -> ExtraTreesClassifier",
+  "family": "TF-IDF + SVD + classical classifier (NOT a transformer)",
+  "framework": "scikit-learn",
+  "faithful_family": false,
+  "kind": "pipeline",
+  "hyperparams": {
+    "features": "TfidfVectorizer(10000) -> TruncatedSVD(100) -> Normalizer",
+    "classifier": "ExtraTreesClassifier(n_estimators=200)"
+  },
+  "trained_at": "2026-10-06T18:49:16+00:00",
+  "sklearn_version": "1.6.1",
+  "numpy_version": "2.3.5",
+  "categories": [
+    "rec.sport.hockey",
+    "sci.space",
+    "comp.graphics",
+    "talk.politics.misc"
+  ],
+  "short_names": [
+    "hockey",
+    "space",
+    "graphics",
+    "politics"
+  ],
+  "score_type": "probability",
+  "train_seconds": 3.18
+}

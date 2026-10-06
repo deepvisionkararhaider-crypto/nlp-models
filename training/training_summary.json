@@ -1,0 +1,11 @@
+[
+  {
+    "num": 5,
+    "folder": "05_fasttext",
+    "display": "FastText",
+    "accuracy": 0.7245308310991957,
+    "f1_macro": 0.7194144125294903,
+    "seconds": 21.63,
+    "artifact_bytes": 3918
+  }
+]

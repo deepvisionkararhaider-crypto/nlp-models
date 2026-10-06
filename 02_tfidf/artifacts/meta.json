@@ -1,0 +1,31 @@
+{
+  "folder": "02_tfidf",
+  "num": 2,
+  "display_name": "TF-IDF",
+  "actual_architecture": "TfidfVectorizer (10k features, 1-2 grams, sublinear) + Calibrated LinearSVC",
+  "family": "Classical sparse features",
+  "framework": "scikit-learn",
+  "faithful_family": true,
+  "kind": "pipeline",
+  "hyperparams": {
+    "vectorizer": "TfidfVectorizer(max_features=10000, stop_words='english', ngram_range=(1,2), sublinear_tf=True)",
+    "classifier": "CalibratedClassifierCV(LinearSVC(max_iter=2000, C=1.0))"
+  },
+  "trained_at": "2026-10-06T18:41:08+00:00",
+  "sklearn_version": "1.6.1",
+  "numpy_version": "2.3.5",
+  "categories": [
+    "rec.sport.hockey",
+    "sci.space",
+    "comp.graphics",
+    "talk.politics.misc"
+  ],
+  "short_names": [
+    "hockey",
+    "space",
+    "graphics",
+    "politics"
+  ],
+  "score_type": "probability",
+  "train_seconds": 2.28
+}

@@ -1,40 +1,78 @@
 # 15. ELECTRA
 
-## Overview
-Efficiently Learning an Encoder via replaced token detection, a more efficient pretraining objective than MLM.
+**Task:** Topic Classification (20-Newsgroups, 4 classes)
+**Framework:** scikit-learn
+**Real implementation:** TF-IDF (10k, 1-2 grams) -> TruncatedSVD(100) -> Calibrated Perceptron
 
-**Dataset**: 20 Newsgroups (4 categories: hockey, space, graphics, politics)
-**Task**: Multi-class text classification
-**Implementation**: ELECTRA-style (TF-IDF + SVD + Perceptron)
+⚠️ **Naming note:** No transformer is used. The name references ELECTRA's discriminator idea; the implementation is classical.
 
-## Key Concept
-`10000 TF-IDF → SVD(100), discriminative Perceptron`
+---
 
-## Results
+## What it does
 
-| Metric    | Value  |
-|-----------|--------|
-| Accuracy  | 0.8760 |
-| Precision | 0.8740 |
-| F1-Score  | 0.8722 |
+Named after ELECTRA's discriminative token-detection objective; implemented as TF-IDF + SVD with a calibrated perceptron.
 
 ## Files
-| File | Description |
-|------|-------------|
-| `model.py` | Main training and evaluation script |
-| `predictions.csv` | Model predictions on test set |
-| `data/newsgroups.csv` | Sample of training data |
-| `plots/electra_analysis.png` | Confusion matrix, PCA, per-class accuracy |
-| `requirements.txt` | Python dependencies |
 
-## Run
+| File | Purpose |
+|------|---------|
+| `model.py` | Original training script (unchanged from the original project). |
+| `app.py` | **Streamlit entry point** - deploy this on Streamlit Community Cloud. |
+| `requirements.txt` | Dependencies for this model only. |
+| `artifacts/model.joblib` | Trained model bundle used by `app.py`. |
+| `artifacts/metrics.json` | Verified held-out test metrics. |
+| `artifacts/meta.json` | Reproducibility info (hyper-parameters, versions). |
+| `data/newsgroups.csv` | Sample of the training data. |
+
+## Results (held-out test set)
+
+| Metric | Value |
+|---|---|
+| Test accuracy | 91.02% |
+| F1 (macro) | 90.79% |
+| Precision (macro) | 90.82% |
+| Recall (macro) | 90.76% |
+| Test set size | 1492 |
+| Train set size | 2242 |
+
+_Metrics are measured on the held-out 20-Newsgroups test split the model never trained on._
+
+## Run locally
+
 ```bash
 pip install -r requirements.txt
-python model.py
+python model.py                        # retrain from scratch (original script)
+python training/train_all.py --only 15   # rebuild artifacts/ from repo root
+streamlit run app.py
 ```
 
-## Categories
-- `rec.sport.hockey` → hockey
-- `sci.space` → space
-- `comp.graphics` → graphics
-- `talk.politics.misc` → politics
+## Deploy (free)
+
+1. Push this repository to GitHub.
+2. On **share.streamlit.io** → *New app* → *Deploy from GitHub*.
+3. Repository `deepvisionkararhaider-crypto/nlp-models`, branch `main`.
+4. **Main file path:** `15_electra/app.py`
+
+## Reproducible training
+
+- **Local / CPU:** `python training/train_all.py --only 15`
+- **Colab / Kaggle:** open [`notebooks/15_electra.ipynb`](../notebooks/15_electra.ipynb).
+  → No GPU is required for this model; it trains on CPU.
+
+## Input & output
+
+- **Input:** any English text (a sentence or a whole post).
+- **Output:** one of four topic labels - `hockey`, `space`, `graphics`, `politics` -
+  with a per-class score table.
+  Models marked `decision_function_softmax` show softmaxed decision-function
+  scores, which are **not** calibrated probabilities (stated in the app).
+
+## Limitations
+
+- Trained on only 4 of the 20-Newsgroups categories; other topics are forced into
+  these four.
+- 1990s Usenet text; modern or very short inputs are harder.
+- Classification only - no generation, summarisation or translation.
+
+---
+[← Back to the portfolio](../README.md) · [Source folder](https://github.com/deepvisionkararhaider-crypto/nlp-models/tree/main/15_electra)

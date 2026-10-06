@@ -1,0 +1,34 @@
+{
+  "folder": "05_fasttext",
+  "num": 5,
+  "display_name": "FastText",
+  "actual_architecture": "gensim FastText (100-d, subword 3-5 grams) mean-pooled + Logistic Regression",
+  "family": "Static word embeddings",
+  "framework": "gensim + scikit-learn",
+  "faithful_family": true,
+  "kind": "embedding_doc_clf",
+  "hyperparams": {
+    "embedding": "FastText(vector_size=100, window=5, min_n=3, max_n=5, bucket=50000)",
+    "pooling": "mean of word vectors",
+    "classifier": "LogisticRegression(max_iter=1000, C=1.0)",
+    "note": "bucket reduced from the original 200000 to keep the artifact Git-friendly"
+  },
+  "trained_at": "2026-10-06T19:01:19+00:00",
+  "sklearn_version": "1.6.1",
+  "numpy_version": "2.3.5",
+  "categories": [
+    "rec.sport.hockey",
+    "sci.space",
+    "comp.graphics",
+    "talk.politics.misc"
+  ],
+  "short_names": [
+    "hockey",
+    "space",
+    "graphics",
+    "politics"
+  ],
+  "score_type": null,
+  "train_seconds": 21.63,
+  "embedding_vocab_size": null
+}

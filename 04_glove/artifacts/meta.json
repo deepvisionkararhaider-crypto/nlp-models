@@ -1,0 +1,33 @@
+{
+  "folder": "04_glove",
+  "num": 4,
+  "display_name": "GloVe",
+  "actual_architecture": "PPMI co-occurrence matrix (3k vocab, window 4) -> TruncatedSVD(100) mean-pooled + Logistic Regression",
+  "family": "Static word embeddings",
+  "framework": "numpy + scikit-learn",
+  "faithful_family": true,
+  "kind": "embedding_doc_clf",
+  "hyperparams": {
+    "embedding": "PPMI co-occurrence (vocab=3000, window=4) -> TruncatedSVD(100)",
+    "pooling": "mean of word vectors",
+    "classifier": "LogisticRegression(max_iter=1000, C=1.0)"
+  },
+  "trained_at": "2026-10-06T18:59:29+00:00",
+  "sklearn_version": "1.6.1",
+  "numpy_version": "2.3.5",
+  "categories": [
+    "rec.sport.hockey",
+    "sci.space",
+    "comp.graphics",
+    "talk.politics.misc"
+  ],
+  "short_names": [
+    "hockey",
+    "space",
+    "graphics",
+    "politics"
+  ],
+  "score_type": null,
+  "train_seconds": 5.25,
+  "embedding_vocab_size": 3000
+}

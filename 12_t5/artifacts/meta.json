@@ -1,0 +1,31 @@
+{
+  "folder": "12_t5",
+  "num": 12,
+  "display_name": "T5",
+  "actual_architecture": "TF-IDF (10k, 1-2 grams) -> TruncatedSVD(100) -> RandomForestClassifier",
+  "family": "TF-IDF + SVD + classical classifier (NOT a transformer)",
+  "framework": "scikit-learn",
+  "faithful_family": false,
+  "kind": "pipeline",
+  "hyperparams": {
+    "features": "TfidfVectorizer(10000) -> TruncatedSVD(100) -> Normalizer",
+    "classifier": "RandomForestClassifier(n_estimators=200)"
+  },
+  "trained_at": "2026-10-06T18:49:09+00:00",
+  "sklearn_version": "1.6.1",
+  "numpy_version": "2.3.5",
+  "categories": [
+    "rec.sport.hockey",
+    "sci.space",
+    "comp.graphics",
+    "talk.politics.misc"
+  ],
+  "short_names": [
+    "hockey",
+    "space",
+    "graphics",
+    "politics"
+  ],
+  "score_type": "probability",
+  "train_seconds": 5.03
+}

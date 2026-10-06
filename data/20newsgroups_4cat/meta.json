@@ -1,0 +1,28 @@
+{
+  "source": "20news-bydate archive (/tmp/20news-8ac4vhuz)",
+  "categories": [
+    "rec.sport.hockey",
+    "sci.space",
+    "comp.graphics",
+    "talk.politics.misc"
+  ],
+  "short_names": [
+    "hockey",
+    "space",
+    "graphics",
+    "politics"
+  ],
+  "label_map": {
+    "0": "rec.sport.hockey",
+    "1": "sci.space",
+    "2": "comp.graphics",
+    "3": "talk.politics.misc"
+  },
+  "remove": [
+    "headers",
+    "footers",
+    "quotes"
+  ],
+  "n_train": 2242,
+  "n_test": 1492
+}

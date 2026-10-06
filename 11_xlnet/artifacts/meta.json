@@ -1,0 +1,31 @@
+{
+  "folder": "11_xlnet",
+  "num": 11,
+  "display_name": "XLNet",
+  "actual_architecture": "TF-IDF (10k, 1-2 grams) -> TruncatedSVD(100) -> GradientBoostingClassifier",
+  "family": "TF-IDF + SVD + classical classifier (NOT a transformer)",
+  "framework": "scikit-learn",
+  "faithful_family": false,
+  "kind": "pipeline",
+  "hyperparams": {
+    "features": "TfidfVectorizer(10000) -> TruncatedSVD(100) -> Normalizer",
+    "classifier": "GradientBoostingClassifier(n_estimators=100, max_depth=4, lr=0.1)"
+  },
+  "trained_at": "2026-10-06T18:49:04+00:00",
+  "sklearn_version": "1.6.1",
+  "numpy_version": "2.3.5",
+  "categories": [
+    "rec.sport.hockey",
+    "sci.space",
+    "comp.graphics",
+    "talk.politics.misc"
+  ],
+  "short_names": [
+    "hockey",
+    "space",
+    "graphics",
+    "politics"
+  ],
+  "score_type": "probability",
+  "train_seconds": 58.75
+}

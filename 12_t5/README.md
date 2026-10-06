@@ -1,40 +1,78 @@
 # 12. T5
 
-## Overview
-Text-to-Text Transfer Transformer: frames all NLP tasks as text generation.
+**Task:** Topic Classification (20-Newsgroups, 4 classes)
+**Framework:** scikit-learn
+**Real implementation:** TF-IDF (10k, 1-2 grams) -> TruncatedSVD(100) -> RandomForestClassifier
 
-**Dataset**: 20 Newsgroups (4 categories: hockey, space, graphics, politics)
-**Task**: Multi-class text classification
-**Implementation**: T5-style (TF-IDF + SVD + Random Forest)
+⚠️ **Naming note:** No transformer is used. The name references T5's design; the implementation is classical.
 
-## Key Concept
-`10000 TF-IDF → SVD(100), 200 trees`
+---
 
-## Results
+## What it does
 
-| Metric    | Value  |
-|-----------|--------|
-| Accuracy  | 0.8619 |
-| Precision | 0.8640 |
-| F1-Score  | 0.8613 |
+Named after T5's text-to-text framing; implemented as TF-IDF + SVD with a random-forest ensemble.
 
 ## Files
-| File | Description |
-|------|-------------|
-| `model.py` | Main training and evaluation script |
-| `predictions.csv` | Model predictions on test set |
-| `data/newsgroups.csv` | Sample of training data |
-| `plots/t5_analysis.png` | Confusion matrix, PCA, per-class accuracy |
-| `requirements.txt` | Python dependencies |
 
-## Run
+| File | Purpose |
+|------|---------|
+| `model.py` | Original training script (unchanged from the original project). |
+| `app.py` | **Streamlit entry point** - deploy this on Streamlit Community Cloud. |
+| `requirements.txt` | Dependencies for this model only. |
+| `artifacts/model.joblib` | Trained model bundle used by `app.py`. |
+| `artifacts/metrics.json` | Verified held-out test metrics. |
+| `artifacts/meta.json` | Reproducibility info (hyper-parameters, versions). |
+| `data/newsgroups.csv` | Sample of the training data. |
+
+## Results (held-out test set)
+
+| Metric | Value |
+|---|---|
+| Test accuracy | 89.48% |
+| F1 (macro) | 89.22% |
+| Precision (macro) | 89.19% |
+| Recall (macro) | 89.27% |
+| Test set size | 1492 |
+| Train set size | 2242 |
+
+_Metrics are measured on the held-out 20-Newsgroups test split the model never trained on._
+
+## Run locally
+
 ```bash
 pip install -r requirements.txt
-python model.py
+python model.py                        # retrain from scratch (original script)
+python training/train_all.py --only 12   # rebuild artifacts/ from repo root
+streamlit run app.py
 ```
 
-## Categories
-- `rec.sport.hockey` → hockey
-- `sci.space` → space
-- `comp.graphics` → graphics
-- `talk.politics.misc` → politics
+## Deploy (free)
+
+1. Push this repository to GitHub.
+2. On **share.streamlit.io** → *New app* → *Deploy from GitHub*.
+3. Repository `deepvisionkararhaider-crypto/nlp-models`, branch `main`.
+4. **Main file path:** `12_t5/app.py`
+
+## Reproducible training
+
+- **Local / CPU:** `python training/train_all.py --only 12`
+- **Colab / Kaggle:** open [`notebooks/12_t5.ipynb`](../notebooks/12_t5.ipynb).
+  → No GPU is required for this model; it trains on CPU.
+
+## Input & output
+
+- **Input:** any English text (a sentence or a whole post).
+- **Output:** one of four topic labels - `hockey`, `space`, `graphics`, `politics` -
+  with a per-class score table.
+  Models marked `decision_function_softmax` show softmaxed decision-function
+  scores, which are **not** calibrated probabilities (stated in the app).
+
+## Limitations
+
+- Trained on only 4 of the 20-Newsgroups categories; other topics are forced into
+  these four.
+- 1990s Usenet text; modern or very short inputs are harder.
+- Classification only - no generation, summarisation or translation.
+
+---
+[← Back to the portfolio](../README.md) · [Source folder](https://github.com/deepvisionkararhaider-crypto/nlp-models/tree/main/12_t5)

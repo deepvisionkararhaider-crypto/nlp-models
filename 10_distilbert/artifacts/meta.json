@@ -1,0 +1,31 @@
+{
+  "folder": "10_distilbert",
+  "num": 10,
+  "display_name": "DistilBERT",
+  "actual_architecture": "TF-IDF (5k, 1-2 grams) -> TruncatedSVD(100) -> Calibrated LinearSVC",
+  "family": "TF-IDF + SVD + classical classifier (NOT a transformer)",
+  "framework": "scikit-learn",
+  "faithful_family": false,
+  "kind": "pipeline",
+  "hyperparams": {
+    "features": "TfidfVectorizer(5000) -> TruncatedSVD(100) -> Normalizer",
+    "classifier": "CalibratedClassifierCV(LinearSVC(max_iter=2000, C=0.8))"
+  },
+  "trained_at": "2026-10-06T18:48:04+00:00",
+  "sklearn_version": "1.6.1",
+  "numpy_version": "2.3.5",
+  "categories": [
+    "rec.sport.hockey",
+    "sci.space",
+    "comp.graphics",
+    "talk.politics.misc"
+  ],
+  "short_names": [
+    "hockey",
+    "space",
+    "graphics",
+    "politics"
+  ],
+  "score_type": "probability",
+  "train_seconds": 2.73
+}
